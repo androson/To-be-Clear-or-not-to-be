@@ -4,30 +4,22 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float jumpHeight = 5;
+    [SerializeField] float jumpHeight = 2;
     [SerializeField] float jumpDuration = 0.5f;
+
     float horizontalInput;
+    float rotationSpeed = 0.5f;
+
     float verticalInput;
-    Rigidbody rb;
+    float walkingSpeed = 5;
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        rb = GetComponent<Rigidbody>();
-
         PlayerMove();
-    }
 
-    void FixedUpdate()
-    {
         float gravity = -2 * jumpHeight / (jumpDuration * jumpDuration);
 
         if (GetComponent<Rigidbody>().velocity.y < 0)
@@ -47,6 +39,8 @@ public class PlayerController : MonoBehaviour
 
     void PlayerMove()
     {
-        rb.velocity = Vector3.forward * horizontalInput * 10f + Vector3.right * verticalInput * 10f;
+        this.transform.position += Time.deltaTime * verticalInput * walkingSpeed * transform.forward;
+        transform.Rotate(0, horizontalInput * rotationSpeed, 0);
     }
+
 }
