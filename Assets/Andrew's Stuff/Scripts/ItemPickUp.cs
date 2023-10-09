@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ItemPickUp : MonoBehaviour
 {
+
+    Vector3 offset = new Vector3(1, 0, -0.2f);
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +17,13 @@ public class ItemPickUp : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Item") && Input.GetKeyDown(KeyCode.F))
+        {
+            other.transform.position = transform.position + offset;
+        }
     }
 }

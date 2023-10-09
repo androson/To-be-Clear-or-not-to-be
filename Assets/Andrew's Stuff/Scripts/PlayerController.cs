@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float jumpHeight = 2;
-    [SerializeField] float jumpDuration = 0.5f;
-
     float horizontalInput;
-    float rotationSpeed = 0.5f;
+    float rotationSpeed = 0.6f;
 
     float verticalInput;
     float walkingSpeed = 5;
@@ -19,22 +16,6 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
 
         PlayerMove();
-
-        float gravity = -2 * jumpHeight / (jumpDuration * jumpDuration);
-
-        if (GetComponent<Rigidbody>().velocity.y < 0)
-        {
-            gravity *= 2;
-        }
-
-        float velocity = -gravity * jumpDuration;
-
-        Physics.gravity = new Vector3(0, gravity, 0);
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GetComponent<Rigidbody>().velocity = Vector3.up * velocity;
-        }
     }
 
     void PlayerMove()
