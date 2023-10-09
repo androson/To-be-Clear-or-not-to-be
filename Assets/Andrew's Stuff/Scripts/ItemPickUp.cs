@@ -19,7 +19,7 @@ public class ItemPickUp : MonoBehaviour
         
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Item") && Input.GetKeyDown(KeyCode.F))
         {
